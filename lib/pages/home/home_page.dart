@@ -16,7 +16,6 @@ class _HomePageState extends State<HomePage> {
   CycleData? _cycleData;
   bool _isLoading = true;
   bool _isWeeklyView = true;
-  int _selectedNavIndex = 0;
   DateTime _focusedDate = DateTime.now();
   late Future<void> _fetchFuture;
 
@@ -65,14 +64,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-      bottomNavigationBar: _buildBottomNav(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppTheme.primary,
-        shape: const CircleBorder(),
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -189,8 +180,6 @@ class _HomePageState extends State<HomePage> {
     final today = DateTime.now();
     final monday = today.subtract(Duration(days: today.weekday - 1));
     final days = List.generate(7, (i) => monday.add(Duration(days: i)));
-    final dayLabels = ['SEL', 'RAB', 'KAM', 'JUM', 'SAB', 'MIN', 'SEN'];
-    // reorder: SEL=Tue, adjust for locale
     final idDayLabels = ['SEN', 'SEL', 'RAB', 'KAM', 'JUM', 'SAB', 'MIN'];
 
     return Row(
@@ -250,7 +239,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildMonthlyCalendar() {
     final today = DateTime.now();
     final firstDay = DateTime(_focusedDate.year, _focusedDate.month, 1);
-    // weekday: 1=Mon, 7=Sun
     final startOffset = (firstDay.weekday - 1) % 7;
     final daysInMonth =
         DateTime(_focusedDate.year, _focusedDate.month + 1, 0).day;
@@ -624,56 +612,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // ─── Bottom Nav ───────────────────────────────────────────
-  Widget _buildBottomNav() {
-    return BottomAppBar(
-      shape: const CircularNotchedRectangle(),
-      notchMargin: 8,
-      color: Colors.white,
-      elevation: 8,
-      child: SizedBox(
-        height: 60,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _navItem(0, Icons.home_rounded, 'Beranda'),
-            _navItem(1, Icons.calendar_month_outlined, 'Kalender'),
-            const SizedBox(width: 48), // space for FAB
-            _navItem(3, Icons.bar_chart_rounded, 'Prediksi'),
-            _navItem(4, Icons.person_outline_rounded, 'Profil'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _navItem(int index, IconData icon, String label) {
-    final isSelected = _selectedNavIndex == index;
-    return GestureDetector(
-      onTap: () => setState(() => _selectedNavIndex = index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isSelected ? AppTheme.primary : AppTheme.textLight,
-            size: 22,
-          ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-              color: isSelected ? AppTheme.primary : AppTheme.textLight,
-              fontWeight:
-                  isSelected ? FontWeight.w600 : FontWeight.normal,
             ),
           ),
         ],

@@ -66,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     } catch (e) {
       if (!mounted) return;
-      setState(() => _errorMessage = 'Gagal mendaftar. Coba lagi.');
+      setState(() => _errorMessage = e.toString());
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -80,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
           // Background
           Positioned.fill(
             child: Image.asset(
-              'assets/images/onboarding3.png',
+              'assets/images/onboard1.png',
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
                 decoration: const BoxDecoration(

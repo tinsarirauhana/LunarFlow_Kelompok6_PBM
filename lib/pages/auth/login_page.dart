@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../core/theme/app_theme.dart';
 import '../../services/auth_service.dart';
 import '../../services/cycle_service.dart';
-import '../home/home_page.dart';
+import '../main_scaffold.dart';
 import 'register_page.dart';
 import 'input_data_page.dart';
 
@@ -56,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
           );
         } else {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const HomePage()),
+            MaterialPageRoute(builder: (_) => const MainScaffold()),
           );
         }
       }
     } catch (e) {
       if (!mounted) return;
-      setState(() => _errorMessage = 'Email atau kata sandi salah.');
+      setState(() => _errorMessage = _errorMessage = e.toString());
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           // Background image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/onboarding3.png',
+              'assets/images/onboard1.png',
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
                 decoration: const BoxDecoration(

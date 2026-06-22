@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart'; // tambah
 import 'core/theme/app_theme.dart';
 import 'pages/splash_page.dart';
 import 'core/config/supabase_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await initializeDateFormatting('id_ID', null); // tambah
 
   await Supabase.initialize(
     url: SupabaseConfig.url,

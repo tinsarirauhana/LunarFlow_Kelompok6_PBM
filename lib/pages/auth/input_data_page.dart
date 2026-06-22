@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import '../../core/theme/app_theme.dart';
 import '../../services/cycle_service.dart';
-import '../home/home_page.dart';
+import '../main_scaffold.dart';
 
 class InputDataPage extends StatefulWidget {
   final String? name;
@@ -80,7 +80,7 @@ class _InputDataPageState extends State<InputDataPage> {
 
       if (!mounted) return;
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomePage()),
+        MaterialPageRoute(builder: (_) => const MainScaffold()),
       );
     } catch (e) {
       if (!mounted) return;

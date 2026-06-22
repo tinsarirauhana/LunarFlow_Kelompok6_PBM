@@ -18,7 +18,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   // Data tiap slide
   final List<_OnboardingData> _slides = [
     _OnboardingData(
-      imagePath: 'assets/images/onboarding1.png',
+      imagePath: 'assets/images/onboard.png',
       title: 'Halo Teman,\nLunarFlow!',
       titleBoldSecondLine: true,
       subtitle:
@@ -26,7 +26,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       isLastSlide: false,
     ),
     _OnboardingData(
-      imagePath: 'assets/images/onboarding2.png',
+      imagePath: 'assets/images/onboard1.png',
       title: 'Prediksi Cerdas\nSetiap Bulan',
       titleBoldSecondLine: true,
       subtitle:
@@ -34,7 +34,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       isLastSlide: false,
     ),
     _OnboardingData(
-      imagePath: 'assets/images/onboarding3.png',
+      imagePath: 'assets/images/onboard1.png',
       title: 'Sudah punya\nakun?',
       titleBoldSecondLine: false,
       subtitle:
