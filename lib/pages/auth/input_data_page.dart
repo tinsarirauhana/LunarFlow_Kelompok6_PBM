@@ -92,150 +92,154 @@ class _InputDataPageState extends State<InputDataPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          // Background
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/onboarding3.png',
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFFE8A0B4), AppTheme.primary],
-                  ),
+          // Background image — full layar
+          Image.asset(
+            'assets/images/onboarding3.png',
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFFE8A0B4), AppTheme.primary],
                 ),
               ),
             ),
           ),
-          Positioned.fill(
-            child: Container(color: AppTheme.primary.withOpacity(0.30)),
-          ),
+          // Overlay — full layar
+          Container(color: AppTheme.primary.withOpacity(0.30)),
 
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 48),
-                  Text(
-                    'LunarFlow',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Pantau siklus haid kamu dengan mudah.',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-
-                  // Nama
-                  _buildLabel('Nama kamu'),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _nameController,
-                    style: GoogleFonts.poppins(fontSize: 14),
-                    decoration: const InputDecoration(hintText: 'Siti Rahayu'),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Tanggal haid terakhir
-                  _buildLabel('Tanggal pertama haid terakhir'),
-                  const SizedBox(height: 8),
-                  GestureDetector(
-                    onTap: _pickDate,
-                    child: Container(
-                      width: double.infinity,
-                      height: 52,
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.85),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _selectedDate != null
-                                ? DateFormat('dd/MM/yyyy').format(_selectedDate!)
-                                : 'dd/mm/yyyy',
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              color: _selectedDate != null
-                                  ? AppTheme.textDark
-                                  : AppTheme.textLight,
-                            ),
-                          ),
-                          const Icon(Icons.calendar_today_outlined,
-                              color: AppTheme.primary, size: 20),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Panjang siklus
-                  _buildLabel('Panjang siklus rata-rata (hari)'),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _cycleLengthController,
-                    keyboardType: TextInputType.number,
-                    style: GoogleFonts.poppins(fontSize: 14),
-                    decoration: const InputDecoration(hintText: '28'),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Durasi haid
-                  _buildLabel('Durasi haid biasanya (hari)'),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _periodDurationController,
-                    keyboardType: TextInputType.number,
-                    style: GoogleFonts.poppins(fontSize: 14),
-                    decoration: const InputDecoration(hintText: '5'),
-                  ),
-
-                  if (_errorMessage != null) ...[
-                    const SizedBox(height: 12),
+          // Konten scroll — minimal setinggi layar
+          SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: screenHeight),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).padding.top + 48),
                     Text(
-                      _errorMessage!,
+                      'LunarFlow',
                       style: GoogleFonts.poppins(
-                          color: Colors.red[200], fontSize: 13),
+                        color: Colors.white,
+                        fontSize: 34,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ],
+                    const SizedBox(height: 4),
+                    Text(
+                      'Pantau siklus haid kamu dengan mudah.',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white.withOpacity(0.9),
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 32),
 
-                  const SizedBox(height: 32),
+                    _buildLabel('Nama kamu'),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _nameController,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                      decoration:
+                          const InputDecoration(hintText: 'Siti Rahayu'),
+                    ),
+                    const SizedBox(height: 16),
 
-                  SizedBox(
-                    width: double.infinity,
-                    height: 52,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _submit,
-                      child: _isLoading
-                          ? const CircularProgressIndicator(
-                              color: Colors.white, strokeWidth: 2)
-                          : Text(
-                              'Mulai Sekarang',
+                    _buildLabel('Tanggal pertama haid terakhir'),
+                    const SizedBox(height: 8),
+                    GestureDetector(
+                      onTap: _pickDate,
+                      child: Container(
+                        width: double.infinity,
+                        height: 52,
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.85),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              _selectedDate != null
+                                  ? DateFormat('dd/MM/yyyy')
+                                      .format(_selectedDate!)
+                                  : 'dd/mm/yyyy',
                               style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
+                                fontSize: 14,
+                                color: _selectedDate != null
+                                    ? AppTheme.textDark
+                                    : AppTheme.textLight,
                               ),
                             ),
+                            const Icon(Icons.calendar_today_outlined,
+                                color: AppTheme.primary, size: 20),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                ],
+                    const SizedBox(height: 16),
+
+                    _buildLabel('Panjang siklus rata-rata (hari)'),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _cycleLengthController,
+                      keyboardType: TextInputType.number,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                      decoration: const InputDecoration(hintText: '28'),
+                    ),
+                    const SizedBox(height: 16),
+
+                    _buildLabel('Durasi haid biasanya (hari)'),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _periodDurationController,
+                      keyboardType: TextInputType.number,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                      decoration: const InputDecoration(hintText: '5'),
+                    ),
+
+                    if (_errorMessage != null) ...[
+                      const SizedBox(height: 12),
+                      Text(
+                        _errorMessage!,
+                        style: GoogleFonts.poppins(
+                            color: Colors.red[200], fontSize: 13),
+                      ),
+                    ],
+
+                    const SizedBox(height: 32),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: _isLoading ? null : _submit,
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white, strokeWidth: 2)
+                            : Text(
+                                'Mulai Sekarang',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
+                ),
               ),
             ),
           ),

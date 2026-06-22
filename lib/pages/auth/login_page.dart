@@ -46,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (response.user != null) {
-        // Cek apakah sudah punya data siklus
         final cycleData = await _cycleService.fetchUserCycle();
         if (!mounted) return;
 
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       if (!mounted) return;
-      setState(() => _errorMessage = _errorMessage = e.toString());
+      setState(() => _errorMessage = e.toString());
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -70,159 +69,160 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          // Background image
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/onboard1.png',
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color(0xFFE8A0B4), AppTheme.primary],
-                  ),
+          // Background image — full layar
+          Image.asset(
+            'assets/images/onboard1.png',
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFFE8A0B4), AppTheme.primary],
                 ),
               ),
             ),
           ),
-          // Pink overlay
-          Positioned.fill(
-            child: Container(
-              color: AppTheme.primary.withOpacity(0.35),
-            ),
-          ),
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 60),
-                  Text(
-                    'MASUK',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'Sudah punya akun? Masuk disini.',
-                    style: GoogleFonts.poppins(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 36),
+          // Pink overlay — full layar
+          Container(color: AppTheme.primary.withOpacity(0.35)),
 
-                  // Email field
-                  _buildLabel('Masukkan Nomor HP/E-Mail'),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    style: GoogleFonts.poppins(fontSize: 14),
-                    decoration: const InputDecoration(
-                      hintText: 'email@domain.com',
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-
-                  // Password field
-                  _buildLabel('Masukkan Kata Sandi'),
-                  const SizedBox(height: 8),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: _obscurePassword,
-                    style: GoogleFonts.poppins(fontSize: 14),
-                    decoration: InputDecoration(
-                      hintText: '••••••••',
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          color: AppTheme.textMedium,
-                          size: 20,
-                        ),
-                        onPressed: () =>
-                            setState(() => _obscurePassword = !_obscurePassword),
-                      ),
-                    ),
-                  ),
-
-                  if (_errorMessage != null) ...[
-                    const SizedBox(height: 12),
+          // Konten scroll — minimal setinggi layar
+          SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: screenHeight),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                        height: MediaQuery.of(context).padding.top + 60),
                     Text(
-                      _errorMessage!,
+                      'MASUK',
                       style: GoogleFonts.poppins(
-                        color: Colors.red[200],
-                        fontSize: 13,
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
                       ),
                     ),
-                  ],
-
-                  const SizedBox(height: 28),
-
-                  // Masuk button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 52,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _login,
-                      child: _isLoading
-                          ? const CircularProgressIndicator(
-                              color: Colors.white, strokeWidth: 2)
-                          : Text(
-                              'Masuk',
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Sudah punya akun? Masuk disini.',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white.withOpacity(0.9),
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 36),
 
-                  // Link ke Daftar
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
+                    _buildLabel('Masukkan Nomor HP/E-Mail'),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                      decoration: const InputDecoration(
+                        hintText: 'email@domain.com',
+                      ),
+                    ),
+                    const SizedBox(height: 18),
+
+                    _buildLabel('Masukkan Kata Sandi'),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      style: GoogleFonts.poppins(fontSize: 14),
+                      decoration: InputDecoration(
+                        hintText: '••••••••',
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppTheme.textMedium,
+                            size: 20,
+                          ),
+                          onPressed: () => setState(
+                              () => _obscurePassword = !_obscurePassword),
+                        ),
+                      ),
+                    ),
+
+                    if (_errorMessage != null) ...[
+                      const SizedBox(height: 12),
+                      Text(
+                        _errorMessage!,
                         style: GoogleFonts.poppins(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.red[200],
                           fontSize: 13,
                         ),
-                        children: [
-                          const TextSpan(text: 'Belum Punya Akun? '),
-                          WidgetSpan(
-                            child: GestureDetector(
-                              onTap: () => Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (_) => const RegisterPage()),
-                              ),
-                              child: Text(
-                                'Daftar disini.',
+                      ),
+                    ],
+
+                    const SizedBox(height: 28),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: _isLoading ? null : _login,
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white, strokeWidth: 2)
+                            : Text(
+                                'Masuk',
                                 style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          style: GoogleFonts.poppins(
+                            color: Colors.white.withOpacity(0.9),
+                            fontSize: 13,
+                          ),
+                          children: [
+                            const TextSpan(text: 'Belum Punya Akun? '),
+                            WidgetSpan(
+                              child: GestureDetector(
+                                onTap: () =>
+                                    Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (_) => const RegisterPage()),
+                                ),
+                                child: Text(
+                                  'Daftar disini.',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 40),
+                  ],
+                ),
               ),
             ),
           ),
