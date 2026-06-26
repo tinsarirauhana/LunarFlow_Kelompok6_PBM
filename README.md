@@ -145,7 +145,7 @@ LunarFlow_Kelompok6_PBM/
 ## Screenshot Tampilan Aplikasi
  
 ### Splash / Onboarding
-![Splash](assets/images/screenshots/splash.png)
+![Splash](assets/images/screenshots/onboarding.png)
  
 ### Login & Register
 ![Login](assets/images/screenshots/login.png)
