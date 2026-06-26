@@ -145,25 +145,25 @@ LunarFlow_Kelompok6_PBM/
 ## Screenshot Tampilan Aplikasi
  
 ### Splash / Onboarding
-![Splash](assets/images/screenshots/onboarding.png)
+![Splash](assets/images/onboarding.png)
  
 ### Login & Register
-![Login](assets/images/screenshots/login.png)
+![Login](assets/images/login.png)
  
 ### Dashboard Utama
-![Dashboard](assets/images/screenshots/dashboard.png)
+![Dashboard](assets/images/dashboard.png)
  
 ### Kalender Siklus
-![Kalender](assets/images/screenshots/kalender.png)
+![Kalender](assets/images/kalender.png)
  
 ### Catat Siklus
-![Catat](assets/images/screenshots/catat.png)
+![Catat](assets/images/catat.png)
  
 ### Prediksi Siklus
-![Prediksi](assets/images/screenshots/prediksi.png)
+![Prediksi](assets/images/prediksi.png)
  
 ### Profil
-![Profil](assets/images/screenshots/profil.png)
+![Profil](assets/images/profil.png)
  
 ---
  
