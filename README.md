@@ -140,27 +140,40 @@ LunarFlow_Kelompok6_PBM/
 
 ---
 
-## Screenshot Tampilan Aplikasi
-
-> Tambahkan screenshot di folder `assets/images/screenshots/` lalu referensikan di sini.
-
-| Halaman | Tampilan |
-|---|---|
-| Splash / Onboarding | ![Splash](assets/images/screenshots/splash.png) |
-| Login / Register | ![Login](assets/images/screenshots/register.png) |
-| Dashboard Utama | ![Dashboard](assets/images/screenshots/dashboard.png) |
-| Kalender Siklus | ![Kalender](assets/images/screenshots/kalender.png) |
-| Catat Siklus | ![Catat](assets/images/screenshots/catat.png) |
-| Prediksi Siklus | ![Catat](assets/images/screenshots/prediksi.png) |
-| Profil | ![Profil](assets/images/screenshots/profil.png) |
-
 ---
-
+ 
+## Screenshot Tampilan Aplikasi
+ 
+### Splash / Onboarding
+![Splash](assets/images/screenshots/splash.png)
+ 
+### Login & Register
+![Login](assets/images/screenshots/login.png)
+ 
+### Dashboard Utama
+![Dashboard](assets/images/screenshots/dashboard.png)
+ 
+### Kalender Siklus
+![Kalender](assets/images/screenshots/kalender.png)
+ 
+### Catat Siklus
+![Catat](assets/images/screenshots/catat.png)
+ 
+### Prediksi Siklus
+![Prediksi](assets/images/screenshots/prediksi.png)
+ 
+### Profil
+![Profil](assets/images/screenshots/profil.png)
+ 
+---
+ 
 ## Anggota Kelompok 6
-
+ 
 | Nama | NIM |
 |---|---|
-| _Tinsari Rauhana_ | _2308107010038_ |
-| _Dian Islami_ | _2308107010048_ |
-
+| Tinsari Rauhana | 2308107010038 |
+| Dian Islami | 2308107010048 |
+| _(isi nama anggota)_ | _(isi NIM)_ |
+ 
 ---
+ 
