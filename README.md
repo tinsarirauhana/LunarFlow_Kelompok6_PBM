@@ -147,10 +147,11 @@ LunarFlow_Kelompok6_PBM/
 | Halaman | Tampilan |
 |---|---|
 | Splash / Onboarding | ![Splash](assets/images/screenshots/splash.png) |
-| Login & Register | ![Login](assets/images/screenshots/login.png) |
+| Login / Register | ![Login](assets/images/screenshots/register.png) |
 | Dashboard Utama | ![Dashboard](assets/images/screenshots/dashboard.png) |
 | Kalender Siklus | ![Kalender](assets/images/screenshots/kalender.png) |
 | Catat Siklus | ![Catat](assets/images/screenshots/catat.png) |
+| Prediksi Siklus | ![Catat](assets/images/screenshots/prediksi.png) |
 | Profil | ![Profil](assets/images/screenshots/profil.png) |
 
 ---
